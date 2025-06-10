@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: false
 ---
 # Rule: Generating a Product Requirements Document (PRD)
@@ -40,7 +40,26 @@ The generated PRD should include the following sections:
 4.  **Functional Requirements:** List the specific functionalities the feature must have. Use clear, concise language (e.g., "The system must allow users to upload a profile picture."). Number these requirements.
 5.  **Non-Goals (Out of Scope):** Clearly state what this feature will *not* include to manage scope.
 6.  **Design Considerations (Optional):** Link to mockups, describe UI/UX requirements, or mention relevant components/styles if applicable.
-7.  **Technical Considerations (Optional):** Mention any known technical constraints, dependencies, or suggestions (e.g., "Should integrate with the existing Auth module").
+7.  **Technical Architecture:** Outline the technical implementation details:
+        - System components
+        - Data models
+        - APIs and integrations
+        - Infrastructure requirements]
+    **Development Roadmap:** Break down the development process into phases:
+        - MVP requirements
+        - Future enhancements
+        - Do not think about timelines whatsoever -- all that matters is scope and detailing exactly what needs to be build in each phase so it can later be cut up into tasks
+    **Logical Dependency Chain:** Define the logical order of development:
+        - Which features need to be built first (foundation)
+        - Getting as quickly as possible to something usable/visible front end that works
+        - Properly pacing and scoping each feature so it is atomic but can also be built upon and improved as development approaches]
+    **Risks and Mitigations:** Identify potential risks and how they'll be addressed:
+        - Technical challenges
+        - Figuring out the MVP that we can build upon
+        - Resource constraints]
+    **Appendix:** Include any additional information:
+        - Research findings
+        - Technical specifications
 8.  **Success Metrics:** How will the success of this feature be measured? (e.g., "Increase user engagement by 10%", "Reduce support tickets related to X").
 9.  **Open Questions:** List any remaining questions or areas needing further clarification.
 
@@ -59,3 +78,4 @@ Assume the primary reader of the PRD is a **junior developer**. Therefore, requi
 1. Do NOT start implementing the PRD
 2. Make sure to ask the user clarifying questions
 3. Take the user's answers to the clarifying questions and improve the PRD
+4. Use Context7 MCP to retrieve docs for libs and packages4. Use Context7 MCP to retrieve docs for libs and packages4. Use Context7 MCP to retrieve docs for libs and packages4. Use Context7 MCP to retrieve docs for libs and packages

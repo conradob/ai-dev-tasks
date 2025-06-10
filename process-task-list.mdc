@@ -1,38 +1,627 @@
 ---
-description: 
+description: Structured management and incremental execution of tasks, ensuring continuous alignment with PRD and RFC context.
 globs: 
 alwaysApply: false
 ---
-# Task List Management
 
-Guidelines for managing task lists in markdown files to track progress on completing a PRD
+# Enhanced Task List Management
 
-## Task Implementation
-- **One sub-task at a time:** Do **NOT** start the next sub‑task until you ask the user for permission and they say “yes” or "y"
-- **Completion protocol:**  
-  1. When you finish a **sub‑task**, immediately mark it as completed by changing `[ ]` to `[x]`.  
-  2. If **all** subtasks underneath a parent task are now `[x]`, also mark the **parent task** as completed.  
-- Stop after each sub‑task and wait for the user’s go‑ahead.
+Guidelines to effectively track progress, maintain context, and ensure accuracy in task implementation.
 
-## Task List Maintenance
+## Task Execution Protocol
 
-1. **Update the task list as you work:**
-   - Mark tasks and subtasks as completed (`[x]`) per the protocol above.
-   - Add new tasks as they emerge.
+- **Sequential Task Execution:** 
+  - Only start the next task or subtask upon explicit user approval (`"yes"` or `"y"`).
+  - Pause immediately after completing each sub-task for explicit confirmation.
 
-2. **Maintain the “Relevant Files” section:**
-   - List every file created or modified.
-   - Give each file a one‑line description of its purpose.
+- **Contextual Checkpoints:**
+  - After each major sub-task completion, briefly summarize progress and confirm alignment:
+    > “I've completed sub-task X.Y involving [brief task summary]. Ready to proceed to the next task, or is additional clarification required?”
 
-## AI Instructions
+- **Error Handling:**
+  - If unsure or encountering ambiguity, stop immediately and clearly ask the user for guidance or clarification.
 
-When working with task lists, the AI must:
+## Task List Updates and Maintenance
 
-1. Regularly update the task list file after finishing any significant work.
-2. Follow the completion protocol:
-   - Mark each finished **sub‑task** `[x]`.
-   - Mark the **parent task** `[x]` once **all** its subtasks are `[x]`.
-3. Add newly discovered tasks.
-4. Keep “Relevant Files” accurate and up to date.
-5. Before starting work, check which sub‑task is next.
-6. After implementing a sub‑task, update the file and then pause for user approval.
+### Regular Maintenance Steps:
+
+1. **Update Task Status Clearly:**
+   - Mark subtasks `[x]` immediately upon completion.
+   - When all subtasks under a parent task are `[x]`, explicitly mark the parent task `[x]`.
+
+2. **Maintain Relevant Files:**
+   - Immediately list newly created or modified files.
+   - Provide a concise, clear one-line explanation of the file's role.
+
+3. **Add Emergent Tasks:**
+   - Explicitly add and number new tasks clearly as they arise, preserving sequential numbering consistency.
+
+## AI Interaction and Contextual Guidance
+
+### Required Context Checks:
+
+- Always reference both **PRD** and **RFC**:
+  - **PRD** for understanding user and business requirements.
+  - **RFC** for specific technical implementation details.
+
+- **Task Progress Summary**: Regularly insert and update a small summary block at the top of the task list file:
+
+```markdown
+## Task Progress Summary
+
+| Task       | Status    | Notes/Next Actions              |
+|------------|-----------|---------------------------------|
+| Task 1     | ✅ Complete | Basic vertical slice delivered  |
+| Task 2     | ⌛️ Ongoing | Working on backend integration |
+| Task 3     | ⏳ Pending | Awaiting previous task completion |
+```
+
+# Continuous Clarification and Alignment:
+
+-   Clearly and proactively prompt user for validation whenever necessary:
+    > "Task 2.3 (Integration test setup) is complete. Confirm before moving on to Task 2.4 (Database schema update)?"
+-   Regularly cross-reference the original RFC's technical architecture and relevant context sections explicitly:
+    > "For detailed context, refer to RFC section 'Architecture' for API integration specifics."
+
+# Recommended Task Completion Example:7. Regularly look to the PRD if context is needed.
+
+# Enhanced Task List Management
+
+Guidelines to effectively track progress, maintain context, and ensure accuracy in task implementation.
+
+## Task Execution Protocol
+
+- **Sequential Task Execution:** 
+  - Only start the next task or subtask upon explicit user approval (`"yes"` or `"y"`).
+  - Pause immediately after completing each sub-task for explicit confirmation.
+
+- **Contextual Checkpoints:**
+  - After each major sub-task completion, briefly summarize progress and confirm alignment:
+    > “I've completed sub-task X.Y involving [brief task summary]. Ready to proceed to the next task, or is additional clarification required?”
+
+- **Error Handling:**
+  - If unsure or encountering ambiguity, stop immediately and clearly ask the user for guidance or clarification.
+
+## Task List Updates and Maintenance
+
+### Regular Maintenance Steps:
+
+1. **Update Task Status Clearly:**
+   - Mark subtasks `[x]` immediately upon completion.
+   - When all subtasks under a parent task are `[x]`, explicitly mark the parent task `[x]`.
+
+2. **Maintain Relevant Files:**
+   - Immediately list newly created or modified files.
+   - Provide a concise, clear one-line explanation of the file's role.
+
+3. **Add Emergent Tasks:**
+   - Explicitly add and number new tasks clearly as they arise, preserving sequential numbering consistency.
+
+## AI Interaction and Contextual Guidance
+
+### Required Context Checks:
+
+- Always reference both **PRD** and **RFC**:
+  - **PRD** for understanding user and business requirements.
+  - **RFC** for specific technical implementation details.
+
+- **Task Progress Summary**: Regularly insert and update a small summary block at the top of the task list file:
+
+```markdown
+## Task Progress Summary
+
+| Task       | Status    | Notes/Next Actions              |
+|------------|-----------|---------------------------------|
+| Task 1     | ✅ Complete | Basic vertical slice delivered  |
+| Task 2     | ⌛️ Ongoing | Working on backend integration |
+| Task 3     | ⏳ Pending | Awaiting previous task completion |
+```
+
+# Continuous Clarification and Alignment:
+
+-   Clearly and proactively prompt user for validation whenever necessary:
+    > "Task 2.3 (Integration test setup) is complete. Confirm before moving on to Task 2.4 (Database schema update)?"
+-   Regularly cross-reference the original RFC's technical architecture and relevant context sections explicitly:
+    > "For detailed context, refer to RFC section 'Architecture' for API integration specifics."
+
+# Recommended Task Completion Example:
+
+```markdown
+## Relevant Files
+
+- `api/profile.ts` – API route for profile upload.
+- `components/ProfileUploader.tsx` – UI component handling profile uploads.
+
+## Task Progress Summary
+
+| Task       | Status      | Notes/Next Actions                        |
+|------------|-------------|-------------------------------------------|
+| Task 1     | ✅ Complete  | Initial vertical slice done               |
+| Task 2     | ⌛️ Ongoing   | Next: Implement persistence (S3 Storage)  |
+| Task 3     | ⏳ Pending   | Follow-on task (Validation enhancements)  |
+
+## Tasks
+
+- [x] **1.0 Initial profile upload (Vertical Slice)** ✅
+  - [x] **1.1 Frontend:** Basic upload form
+  - [x] **1.2 Backend:** Stub upload endpoint
+
+- [ ] **2.0 Add persistent storage**
+  - [x] **2.1 Backend:** Configure AWS SDK (S3)
+  - [ ] **2.2 Backend:** Integrate S3 with upload API
+    - *Reminder:* Check `.env.local` for AWS credentials.
+    - *RFC Reference:* "Network Interactions" section for exact endpoint behavior.
+  - [ ] **2.3 Tests:** Integration tests with AWS SDK mocks
+    - *AI Checkpoint:* Confirm tests pass locally before continuing.
+
+- [ ] **3.0 Validation and Error Handling** (Pending)
+```
+7. Regularly look to the PRD if context is needed.
+
+# Enhanced Task List Management
+
+Guidelines to effectively track progress, maintain context, and ensure accuracy in task implementation.
+
+## Task Execution Protocol
+
+- **Sequential Task Execution:** 
+  - Only start the next task or subtask upon explicit user approval (`"yes"` or `"y"`).
+  - Pause immediately after completing each sub-task for explicit confirmation.
+
+- **Contextual Checkpoints:**
+  - After each major sub-task completion, briefly summarize progress and confirm alignment:
+    > “I've completed sub-task X.Y involving [brief task summary]. Ready to proceed to the next task, or is additional clarification required?”
+
+- **Error Handling:**
+  - If unsure or encountering ambiguity, stop immediately and clearly ask the user for guidance or clarification.
+
+## Task List Updates and Maintenance
+
+### Regular Maintenance Steps:
+
+1. **Update Task Status Clearly:**
+   - Mark subtasks `[x]` immediately upon completion.
+   - When all subtasks under a parent task are `[x]`, explicitly mark the parent task `[x]`.
+
+2. **Maintain Relevant Files:**
+   - Immediately list newly created or modified files.
+   - Provide a concise, clear one-line explanation of the file's role.
+
+3. **Add Emergent Tasks:**
+   - Explicitly add and number new tasks clearly as they arise, preserving sequential numbering consistency.
+
+## AI Interaction and Contextual Guidance
+
+### Required Context Checks:
+
+- Always reference both **PRD** and **RFC**:
+  - **PRD** for understanding user and business requirements.
+  - **RFC** for specific technical implementation details.
+
+- **Task Progress Summary**: Regularly insert and update a small summary block at the top of the task list file:
+
+```markdown
+## Task Progress Summary
+
+| Task       | Status    | Notes/Next Actions              |
+|------------|-----------|---------------------------------|
+| Task 1     | ✅ Complete | Basic vertical slice delivered  |
+| Task 2     | ⌛️ Ongoing | Working on backend integration |
+| Task 3     | ⏳ Pending | Awaiting previous task completion |
+```
+
+# Continuous Clarification and Alignment:
+
+-   Clearly and proactively prompt user for validation whenever necessary:
+    > "Task 2.3 (Integration test setup) is complete. Confirm before moving on to Task 2.4 (Database schema update)?"
+-   Regularly cross-reference the original RFC's technical architecture and relevant context sections explicitly:
+    > "For detailed context, refer to RFC section 'Architecture' for API integration specifics."
+
+# Recommended Task Completion Example:
+
+```markdown
+## Relevant Files
+
+- `api/profile.ts` – API route for profile upload.
+- `components/ProfileUploader.tsx` – UI component handling profile uploads.
+
+## Task Progress Summary
+
+| Task       | Status      | Notes/Next Actions                        |
+|------------|-------------|-------------------------------------------|
+| Task 1     | ✅ Complete  | Initial vertical slice done               |
+| Task 2     | ⌛️ Ongoing   | Next: Implement persistence (S3 Storage)  |
+| Task 3     | ⏳ Pending   | Follow-on task (Validation enhancements)  |
+
+## Tasks
+
+- [x] **1.0 Initial profile upload (Vertical Slice)** ✅
+  - [x] **1.1 Frontend:** Basic upload form
+  - [x] **1.2 Backend:** Stub upload endpoint
+
+- [ ] **2.0 Add persistent storage**
+  - [x] **2.1 Backend:** Configure AWS SDK (S3)
+  - [ ] **2.2 Backend:** Integrate S3 with upload API
+    - *Reminder:* Check `.env.local` for AWS credentials.
+    - *RFC Reference:* "Network Interactions" section for exact endpoint behavior.
+  - [ ] **2.3 Tests:** Integration tests with AWS SDK mocks
+    - *AI Checkpoint:* Confirm tests pass locally before continuing.
+
+- [ ] **3.0 Validation and Error Handling** (Pending)
+```
+7. Regularly look to the PRD if context is needed.
+
+# Enhanced Task List Management
+
+Guidelines to effectively track progress, maintain context, and ensure accuracy in task implementation.
+
+## Task Execution Protocol
+
+- **Sequential Task Execution:** 
+  - Only start the next task or subtask upon explicit user approval (`"yes"` or `"y"`).
+  - Pause immediately after completing each sub-task for explicit confirmation.
+
+- **Contextual Checkpoints:**
+  - After each major sub-task completion, briefly summarize progress and confirm alignment:
+    > “I've completed sub-task X.Y involving [brief task summary]. Ready to proceed to the next task, or is additional clarification required?”
+
+- **Error Handling:**
+  - If unsure or encountering ambiguity, stop immediately and clearly ask the user for guidance or clarification.
+
+## Task List Updates and Maintenance
+
+### Regular Maintenance Steps:
+
+1. **Update Task Status Clearly:**
+   - Mark subtasks `[x]` immediately upon completion.
+   - When all subtasks under a parent task are `[x]`, explicitly mark the parent task `[x]`.
+
+2. **Maintain Relevant Files:**
+   - Immediately list newly created or modified files.
+   - Provide a concise, clear one-line explanation of the file's role.
+
+3. **Add Emergent Tasks:**
+   - Explicitly add and number new tasks clearly as they arise, preserving sequential numbering consistency.
+
+## AI Interaction and Contextual Guidance
+
+### Required Context Checks:
+
+- Always reference both **PRD** and **RFC**:
+  - **PRD** for understanding user and business requirements.
+  - **RFC** for specific technical implementation details.
+
+- **Task Progress Summary**: Regularly insert and update a small summary block at the top of the task list file:
+
+```markdown
+## Task Progress Summary
+
+| Task       | Status    | Notes/Next Actions              |
+|------------|-----------|---------------------------------|
+| Task 1     | ✅ Complete | Basic vertical slice delivered  |
+| Task 2     | ⌛️ Ongoing | Working on backend integration |
+| Task 3     | ⏳ Pending | Awaiting previous task completion |
+```
+
+# Continuous Clarification and Alignment:
+
+-   Clearly and proactively prompt user for validation whenever necessary:
+    > "Task 2.3 (Integration test setup) is complete. Confirm before moving on to Task 2.4 (Database schema update)?"
+-   Regularly cross-reference the original RFC's technical architecture and relevant context sections explicitly:
+    > "For detailed context, refer to RFC section 'Architecture' for API integration specifics."
+
+# Recommended Task Completion Example:
+
+```markdown
+## Relevant Files
+
+- `api/profile.ts` – API route for profile upload.
+- `components/ProfileUploader.tsx` – UI component handling profile uploads.
+
+## Task Progress Summary
+
+| Task       | Status      | Notes/Next Actions                        |
+|------------|-------------|-------------------------------------------|
+| Task 1     | ✅ Complete  | Initial vertical slice done               |
+| Task 2     | ⌛️ Ongoing   | Next: Implement persistence (S3 Storage)  |
+| Task 3     | ⏳ Pending   | Follow-on task (Validation enhancements)  |
+
+## Tasks
+
+- [x] **1.0 Initial profile upload (Vertical Slice)** ✅
+  - [x] **1.1 Frontend:** Basic upload form
+  - [x] **1.2 Backend:** Stub upload endpoint
+
+- [ ] **2.0 Add persistent storage**
+  - [x] **2.1 Backend:** Configure AWS SDK (S3)
+  - [ ] **2.2 Backend:** Integrate S3 with upload API
+    - *Reminder:* Check `.env.local` for AWS credentials.
+    - *RFC Reference:* "Network Interactions" section for exact endpoint behavior.
+  - [ ] **2.3 Tests:** Integration tests with AWS SDK mocks
+    - *AI Checkpoint:* Confirm tests pass locally before continuing.
+
+- [ ] **3.0 Validation and Error Handling** (Pending)
+```
+7. Regularly look to the PRD if context is needed.
+
+# Enhanced Task List Management
+
+Guidelines to effectively track progress, maintain context, and ensure accuracy in task implementation.
+
+## Task Execution Protocol
+
+- **Sequential Task Execution:** 
+  - Only start the next task or subtask upon explicit user approval (`"yes"` or `"y"`).
+  - Pause immediately after completing each sub-task for explicit confirmation.
+
+- **Contextual Checkpoints:**
+  - After each major sub-task completion, briefly summarize progress and confirm alignment:
+    > “I've completed sub-task X.Y involving [brief task summary]. Ready to proceed to the next task, or is additional clarification required?”
+
+- **Error Handling:**
+  - If unsure or encountering ambiguity, stop immediately and clearly ask the user for guidance or clarification.
+
+## Task List Updates and Maintenance
+
+### Regular Maintenance Steps:
+
+1. **Update Task Status Clearly:**
+   - Mark subtasks `[x]` immediately upon completion.
+   - When all subtasks under a parent task are `[x]`, explicitly mark the parent task `[x]`.
+
+2. **Maintain Relevant Files:**
+   - Immediately list newly created or modified files.
+   - Provide a concise, clear one-line explanation of the file's role.
+
+3. **Add Emergent Tasks:**
+   - Explicitly add and number new tasks clearly as they arise, preserving sequential numbering consistency.
+
+## AI Interaction and Contextual Guidance
+
+### Required Context Checks:
+
+- Always reference both **PRD** and **RFC**:
+  - **PRD** for understanding user and business requirements.
+  - **RFC** for specific technical implementation details.
+
+- **Task Progress Summary**: Regularly insert and update a small summary block at the top of the task list file:
+
+```markdown
+## Task Progress Summary
+
+| Task       | Status    | Notes/Next Actions              |
+|------------|-----------|---------------------------------|
+| Task 1     | ✅ Complete | Basic vertical slice delivered  |
+| Task 2     | ⌛️ Ongoing | Working on backend integration |
+| Task 3     | ⏳ Pending | Awaiting previous task completion |
+```
+
+# Continuous Clarification and Alignment:
+
+-   Clearly and proactively prompt user for validation whenever necessary:
+    > "Task 2.3 (Integration test setup) is complete. Confirm before moving on to Task 2.4 (Database schema update)?"
+-   Regularly cross-reference the original RFC's technical architecture and relevant context sections explicitly:
+    > "For detailed context, refer to RFC section 'Architecture' for API integration specifics."
+
+# Recommended Task Completion Example:
+
+```markdown
+## Relevant Files
+
+- `api/profile.ts` – API route for profile upload.
+- `components/ProfileUploader.tsx` – UI component handling profile uploads.
+
+## Task Progress Summary
+
+| Task       | Status      | Notes/Next Actions                        |
+|------------|-------------|-------------------------------------------|
+| Task 1     | ✅ Complete  | Initial vertical slice done               |
+| Task 2     | ⌛️ Ongoing   | Next: Implement persistence (S3 Storage)  |
+| Task 3     | ⏳ Pending   | Follow-on task (Validation enhancements)  |
+
+## Tasks
+
+- [x] **1.0 Initial profile upload (Vertical Slice)** ✅
+  - [x] **1.1 Frontend:** Basic upload form
+  - [x] **1.2 Backend:** Stub upload endpoint
+
+- [ ] **2.0 Add persistent storage**
+  - [x] **2.1 Backend:** Configure AWS SDK (S3)
+  - [ ] **2.2 Backend:** Integrate S3 with upload API
+    - *Reminder:* Check `.env.local` for AWS credentials.
+    - *RFC Reference:* "Network Interactions" section for exact endpoint behavior.
+  - [ ] **2.3 Tests:** Integration tests with AWS SDK mocks
+    - *AI Checkpoint:* Confirm tests pass locally before continuing.
+
+- [ ] **3.0 Validation and Error Handling** (Pending)
+```
+7. Regularly look to the PRD if context is needed.
+
+# Enhanced Task List Management
+
+Guidelines to effectively track progress, maintain context, and ensure accuracy in task implementation.
+
+## Task Execution Protocol
+
+- **Sequential Task Execution:** 
+  - Only start the next task or subtask upon explicit user approval (`"yes"` or `"y"`).
+  - Pause immediately after completing each sub-task for explicit confirmation.
+
+- **Contextual Checkpoints:**
+  - After each major sub-task completion, briefly summarize progress and confirm alignment:
+    > “I've completed sub-task X.Y involving [brief task summary]. Ready to proceed to the next task, or is additional clarification required?”
+
+- **Error Handling:**
+  - If unsure or encountering ambiguity, stop immediately and clearly ask the user for guidance or clarification.
+
+## Task List Updates and Maintenance
+
+### Regular Maintenance Steps:
+
+1. **Update Task Status Clearly:**
+   - Mark subtasks `[x]` immediately upon completion.
+   - When all subtasks under a parent task are `[x]`, explicitly mark the parent task `[x]`.
+
+2. **Maintain Relevant Files:**
+   - Immediately list newly created or modified files.
+   - Provide a concise, clear one-line explanation of the file's role.
+
+3. **Add Emergent Tasks:**
+   - Explicitly add and number new tasks clearly as they arise, preserving sequential numbering consistency.
+
+## AI Interaction and Contextual Guidance
+
+### Required Context Checks:
+
+- Always reference both **PRD** and **RFC**:
+  - **PRD** for understanding user and business requirements.
+  - **RFC** for specific technical implementation details.
+
+- **Task Progress Summary**: Regularly insert and update a small summary block at the top of the task list file:
+
+```markdown
+## Task Progress Summary
+
+| Task       | Status    | Notes/Next Actions              |
+|------------|-----------|---------------------------------|
+| Task 1     | ✅ Complete | Basic vertical slice delivered  |
+| Task 2     | ⌛️ Ongoing | Working on backend integration |
+| Task 3     | ⏳ Pending | Awaiting previous task completion |
+```
+
+# Continuous Clarification and Alignment:
+
+-   Clearly and proactively prompt user for validation whenever necessary:
+    > "Task 2.3 (Integration test setup) is complete. Confirm before moving on to Task 2.4 (Database schema update)?"
+-   Regularly cross-reference the original RFC's technical architecture and relevant context sections explicitly:
+    > "For detailed context, refer to RFC section 'Architecture' for API integration specifics."
+
+# Recommended Task Completion Example:
+
+```markdown
+## Relevant Files
+
+- `api/profile.ts` – API route for profile upload.
+- `components/ProfileUploader.tsx` – UI component handling profile uploads.
+
+## Task Progress Summary
+
+| Task       | Status      | Notes/Next Actions                        |
+|------------|-------------|-------------------------------------------|
+| Task 1     | ✅ Complete  | Initial vertical slice done               |
+| Task 2     | ⌛️ Ongoing   | Next: Implement persistence (S3 Storage)  |
+| Task 3     | ⏳ Pending   | Follow-on task (Validation enhancements)  |
+
+## Tasks
+
+- [x] **1.0 Initial profile upload (Vertical Slice)** ✅
+  - [x] **1.1 Frontend:** Basic upload form
+  - [x] **1.2 Backend:** Stub upload endpoint
+
+- [ ] **2.0 Add persistent storage**
+  - [x] **2.1 Backend:** Configure AWS SDK (S3)
+  - [ ] **2.2 Backend:** Integrate S3 with upload API
+    - *Reminder:* Check `.env.local` for AWS credentials.
+    - *RFC Reference:* "Network Interactions" section for exact endpoint behavior.
+  - [ ] **2.3 Tests:** Integration tests with AWS SDK mocks
+    - *AI Checkpoint:* Confirm tests pass locally before continuing.
+
+- [ ] **3.0 Validation and Error Handling** (Pending)
+```
+7. Regularly look to the PRD if context is needed.
+
+# Enhanced Task List Management
+
+Guidelines to effectively track progress, maintain context, and ensure accuracy in task implementation.
+
+## Task Execution Protocol
+
+- **Sequential Task Execution:** 
+  - Only start the next task or subtask upon explicit user approval (`"yes"` or `"y"`).
+  - Pause immediately after completing each sub-task for explicit confirmation.
+
+- **Contextual Checkpoints:**
+  - After each major sub-task completion, briefly summarize progress and confirm alignment:
+    > “I've completed sub-task X.Y involving [brief task summary]. Ready to proceed to the next task, or is additional clarification required?”
+
+- **Error Handling:**
+  - If unsure or encountering ambiguity, stop immediately and clearly ask the user for guidance or clarification.
+
+## Task List Updates and Maintenance
+
+### Regular Maintenance Steps:
+
+1. **Update Task Status Clearly:**
+   - Mark subtasks `[x]` immediately upon completion.
+   - When all subtasks under a parent task are `[x]`, explicitly mark the parent task `[x]`.
+
+2. **Maintain Relevant Files:**
+   - Immediately list newly created or modified files.
+   - Provide a concise, clear one-line explanation of the file's role.
+
+3. **Add Emergent Tasks:**
+   - Explicitly add and number new tasks clearly as they arise, preserving sequential numbering consistency.
+
+## AI Interaction and Contextual Guidance
+
+### Required Context Checks:
+
+- Always reference both **PRD** and **RFC**:
+  - **PRD** for understanding user and business requirements.
+  - **RFC** for specific technical implementation details.
+
+- **Task Progress Summary**: Regularly insert and update a small summary block at the top of the task list file:
+
+```markdown
+## Task Progress Summary
+
+| Task       | Status    | Notes/Next Actions              |
+|------------|-----------|---------------------------------|
+| Task 1     | ✅ Complete | Basic vertical slice delivered  |
+| Task 2     | ⌛️ Ongoing | Working on backend integration |
+| Task 3     | ⏳ Pending | Awaiting previous task completion |
+```
+
+# Continuous Clarification and Alignment:
+
+-   Clearly and proactively prompt user for validation whenever necessary:
+    > "Task 2.3 (Integration test setup) is complete. Confirm before moving on to Task 2.4 (Database schema update)?"
+-   Regularly cross-reference the original RFC's technical architecture and relevant context sections explicitly:
+    > "For detailed context, refer to RFC section 'Architecture' for API integration specifics."
+
+# Recommended Task Completion Example:
+
+Mark each sub-task as completed upon its completion, and then mark the overall task as completed after all sub-tasks are finished.
+
+Keep tasks progress summary and relevant files up to date. 
+
+```markdown
+## Relevant Files
+
+- `api/profile.ts` – API route for profile upload.
+- `components/ProfileUploader.tsx` – UI component handling profile uploads.
+
+## Task Progress Summary
+
+| Task       | Status      | Notes/Next Actions                        |
+|------------|-------------|-------------------------------------------|
+| Task 1     | ✅ Complete  | Initial vertical slice done               |
+| Task 2     | ⌛️ Ongoing   | Next: Implement persistence (S3 Storage)  |
+| Task 3     | ⏳ Pending   | Follow-on task (Validation enhancements)  |
+
+## Tasks
+
+- [x] **1.0 Initial profile upload (Vertical Slice)** ✅
+  - [x] **1.1 Frontend:** Basic upload form
+  - [x] **1.2 Backend:** Stub upload endpoint
+
+- [ ] **2.0 Add persistent storage**
+  - [x] **2.1 Backend:** Configure AWS SDK (S3)
+  - [ ] **2.2 Backend:** Integrate S3 with upload API
+    - *Reminder:* Check `.env.local` for AWS credentials.
+    - *RFC Reference:* "Network Interactions" section for exact endpoint behavior.
+  - [ ] **2.3 Tests:** Integration tests with AWS SDK mocks
+    - *AI Checkpoint:* Confirm tests pass locally before continuing.
+
+- [ ] **3.0 Validation and Error Handling** (Pending)
+```

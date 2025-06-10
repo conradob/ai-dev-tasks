@@ -1,64 +1,107 @@
 ---
-description: 
-globs: 
+description: Generate detailed, context-rich task lists from PRD and RFC with structured context summaries, explicit file references, and clear AI checkpoints.
+globs:
 alwaysApply: false
 ---
-# Rule: Generating a Task List from a PRD
+# Rule: Generate Context-Rich Task List from PRD and RFC
 
 ## Goal
+Create a comprehensive, step-by-step, and context-rich task list in Markdown format using the feature's PRD and RFC. Ensure clarity and completeness by explicitly embedding context, file references, and checkpoints for continuous AI alignment.
 
-To guide an AI assistant in creating a detailed, step-by-step task list in Markdown format based on an existing Product Requirements Document (PRD). The task list should guide a developer through implementation.
+## Input
+- A reference to the PRD file (requirements, user stories).
+- A reference to the RFC file (technical architecture, vertical slice strategy).
 
 ## Output
-
 - **Format:** Markdown (`.md`)
 - **Location:** `/tasks/`
-- **Filename:** `tasks-[prd-file-name].md` (e.g., `tasks-prd-user-profile-editing.md`)
+- **Filename:** `tasks-[feature-name].md`
 
 ## Process
 
-1.  **Receive PRD Reference:** The user points the AI to a specific PRD file
-2.  **Analyze PRD:** The AI reads and analyzes the functional requirements, user stories, and other sections of the specified PRD.
-3.  **Phase 1: Generate Parent Tasks:** Based on the PRD analysis, create the file and generate the main, high-level tasks required to implement the feature. Use your judgement on how many high-level tasks to use. It's likely to be about 5. Present these tasks to the user in the specified format (without sub-tasks yet). Inform the user: "I have generated the high-level tasks based on the PRD. Ready to generate the sub-tasks? Respond with 'Go' to proceed."
-4.  **Wait for Confirmation:** Pause and wait for the user to respond with "Go".
-5.  **Phase 2: Generate Sub-Tasks:** Once the user confirms, break down each parent task into smaller, actionable sub-tasks necessary to complete the parent task. Ensure sub-tasks logically follow from the parent task and cover the implementation details implied by the PRD.
-6.  **Identify Relevant Files:** Based on the tasks and PRD, identify potential files that will need to be created or modified. List these under the `Relevant Files` section, including corresponding test files if applicable.
-7.  **Generate Final Output:** Combine the parent tasks, sub-tasks, relevant files, and notes into the final Markdown structure.
-8.  **Save Task List:** Save the generated document in the `/tasks/` directory with the filename `tasks-[prd-file-name].md`, where `[prd-file-name]` matches the base name of the input PRD file (e.g., if the input was `prd-user-profile-editing.md`, the output is `tasks-prd-user-profile-editing.md`).
+### Phase 1: Analyze and Propose High-Level Tasks
+1. **Receive References:** PRD and RFC.
+2. **Analyze Documents:** Extract key vertical slices (not technical layers).
+3. **Generate High-Level Tasks:**
+   - First task is a minimal, end-to-end vertical slice.
+   - Subsequent tasks enhance and polish the feature incrementally.
+   - Keep tasks concise (4-7 tasks).
+4. **Wait for User Confirmation:** Clearly ask, "These are the proposed high-level tasks. Reply 'Go' to proceed with detailed sub-tasks."
 
-## Output Format
+### Phase 2: Detailed Task and Sub-task Generation
+Upon confirmation:
 
-The generated task list _must_ follow this structure:
+1. **Context Metadata Section:** Embed succinct summary metadata.
+   ```markdown
+   ## Context Summary
 
-```markdown
-## Relevant Files
+   | Context Item        | Description                                |
+   |---------------------|--------------------------------------------|
+   | Feature             | [Feature Name]                              |
+   | PRD                 | [Link to PRD]                               |
+   | RFC                 | [Link to RFC]                               |
+   | Vertical Slice      | [Order and description of current slice]    |
+   | Tech Stack          | [Tech stack from RFC]                       |
+   | Dependencies        | [Prerequisites or completed tasks needed]   |
+   ```
 
-- `path/to/potential/file1.ts` - Brief description of why this file is relevant (e.g., Contains the main component for this feature).
-- `path/to/file1.test.ts` - Unit tests for `file1.ts`.
-- `path/to/another/file.tsx` - Brief description (e.g., API route handler for data submission).
-- `path/to/another/file.test.tsx` - Unit tests for `another/file.tsx`.
-- `lib/utils/helpers.ts` - Brief description (e.g., Utility functions needed for calculations).
-- `lib/utils/helpers.test.ts` - Unit tests for `helpers.ts`.
+2. **Completed Tasks Section:** Maintain a brief summary of already completed tasks.
+   ```markdown
+   ## Completed Tasks ✅
 
-### Notes
+   - **1.0 Initial vertical slice:** Basic end-to-end setup
+   - **2.0 Expanded functionality:** UI and backend enhancements
 
-- Unit tests should typically be placed alongside the code files they are testing (e.g., `MyComponent.tsx` and `MyComponent.test.tsx` in the same directory).
-- Use `npx jest [optional/path/to/test/file]` to run tests. Running without a path executes all tests found by the Jest configuration.
+   _Current Task: Task 3.0 (Feature Persistence)_
+   ```
 
-## Tasks
+3. **Generate Detailed Sub-Tasks:** Each task explicitly includes:
+   - Clear sub-task definitions with precise action.
+   - Embedded contextual reminders or prompts.
+   - Explicit file paths and relevance.
 
-- [ ] 1.0 Parent Task Title
-  - [ ] 1.1 [Sub-task description 1.1]
-  - [ ] 1.2 [Sub-task description 1.2]
-- [ ] 2.0 Parent Task Title
-  - [ ] 2.1 [Sub-task description 2.1]
-- [ ] 3.0 Parent Task Title (may not require sub-tasks if purely structural or configuration)
-```
+   ```markdown
+   ## Tasks
+
+   - [ ] **3.0 Implement Feature Persistence**
+     _Description:_ Persist uploaded files to AWS S3.
+
+     - [ ] **3.1 Backend:** Integrate AWS S3 storage in `api/upload.ts`.
+       - **Context Reminder:** Refer to RFC "Architecture" and "Network Interactions" sections.
+       - **Files:** `api/upload.ts` (API handler), `lib/aws/s3Client.ts` (S3 helper).
+
+     - [ ] **3.2 Backend:** Update API route to store files in S3.
+       - **Context Reminder:** Verify environment variables in `.env.local`.
+       - **Files:** `api/upload.ts`
+
+     - [ ] **3.3 Tests:** Write integration tests for S3 upload.
+       - **Context Reminder:** Mock AWS SDK clearly using Jest.
+       - **Files:** `tests/api/upload.test.ts`
+
+     - **AI Checkpoint:** Confirm integration tests pass locally. If unclear, pause and request clarification.
+   ```
+
+4. **Relevant Files Section:** Clearly list all relevant files at the sub-task level, justifying relevance.
+   ```markdown
+   ## Relevant Files
+
+   - `pages/upload.tsx` – Frontend UI component.
+   - `api/upload.ts` – Backend route handling file upload to AWS S3.
+   - `lib/aws/s3Client.ts` – AWS S3 helper functions.
+   - `tests/api/upload.test.ts` – Integration tests for upload.
+   ```
+
+5. **Notes Section:** Provide additional guidelines.
+   ```markdown
+   ### Notes
+
+   - Run tests using the project command (`npx jest`).
+   - Use Context7 to access documentation for unfamiliar libraries.
+   - Confirm environment variables are configured before integration tests.
+   - Each task completion should deliver an incrementally functional vertical slice.
+   ```
 
 ## Interaction Model
-
-The process explicitly requires a pause after generating parent tasks to get user confirmation ("Go") before proceeding to generate the detailed sub-tasks. This ensures the high-level plan aligns with user expectations before diving into details.
-
-## Target Audience
-
-Assume the primary reader of the task list is a **junior developer** who will implement the feature.
+- Pause explicitly after high-level tasks for user confirmation.
+- Include explicit AI checkpoints after significant subtasks or integrations to ensure alignment.
+- AI prompts for clarification proactively whenever needed to maintain context accuracy and task clarity.

@@ -1,0 +1,119 @@
+---
+description: Generate a Technical Design RFC based on a PRD.
+globs: 
+alwaysApply: false
+---
+
+# Rule: Generating a Technical Design RFC
+
+## Goal
+Guide the AI in creating a detailed technical design document (RFC) in Markdown format, based on an existing PRD. The RFC translates the product requirements into a concrete technical approach, including architecture and a development plan focused on vertical slices of functionality.
+
+## Process
+
+1. **Prerequisite:** A finalized PRD should be available and referenced as input.
+2. **Ask Technical Questions:** Before writing the RFC, the AI *must* ask any clarifying questions about technical context:
+   - Confirm the tech stack or frameworks to use (if not obvious from project context).
+   - Inquire about any existing system constraints, integrations, or data models relevant to the feature.
+   - Clarify performance, security, or scalability requirements if the feature warrants it.
+3. **Generate RFC:** Using the PRD and the answers to the technical questions, generate an RFC with the structure outlined below, filling in each section with details specific to the feature.
+4. **Save RFC:** Save the generated RFC as `rfc-[feature-name].md` inside the `/tasks` or `/docs` directory (as preferred).
+
+## RFC Structure
+
+```md
+Use the following template for the RFC content:
+
+# RFC - [Feature Name or Design Proposal Title]
+
+## Abstract
+
+*Briefly describe the feature and the high-level technical approach.*\
+*(1-3 sentences summarizing the design and outcome.)*
+
+## Product PRD
+
+*Link to or mention the PRD that this RFC is based on.*\
+For example: "This technical design is based on the requirements in prd-feature-name.md."
+
+## Background
+
+*Provide context on why we are building this feature.*
+ - What problem are we solving and why now? (Reference any relevant background from the PRD.)
+ - What existing system or architecture do we have, and how does this feature fit in?
+ - Any constraints or considerations inherited from the current system?
+
+## Architecture
+
+* Describe the proposed architecture and design in detail.*
+  - **Components & Responsibilities:** Outline the main components/modules (frontend, backend, database, services) involved in this feature and their roles.
+  - **Data Models:** Describe new or modified data models, including database schema changes or new data structures.
+  - **Control Flow:** Explain how data and control will flow through the components (e.g., user clicks button -> front-end calls API -> backend service -> database).
+  - Include an architecture diagram if possible (not required in Markdown, but describe interactions clearly).
+  - **Vertical Slice Plan:** Explain how the implementation will be broken into vertical slices. For example, "First implement a minimal end-to-end slice: a basic UI triggering a stubbed API. Then iterate to add database persistence, followed by input validation and error handling." This ensures early integration of all layers.
+
+## Network Interactions
+
+*Detail any new network calls or integrations:*
+  - New API endpoints (HTTP routes, request/response format).
+  - External services or third-party APIs the feature will call.
+  - Changes to existing API contracts or network protocols.
+
+## Privacy, Security, and Legal Implications
+
+* Address any data privacy or security concerns:*
+ - Will we store or handle sensitive user data? If so, how do we protect it?
+ - Do we need to meet any compliance requirements (GDPR, etc.) for this feature?
+ - If unsure about any aspect here, note that this area needs review.
+
+## SDKs and Libraries
+
+* List any new libraries, frameworks, or SDKs introduced or heavily used by this feature:*
+  - Programming language and framework (e.g., "Frontend built with React 18, Backend using Node.js/Express").
+  - Key libraries (e.g., state management library, UI component library, database ORM, etc.).
+  - Justify adding a new dependency if it's not already in the project.
+
+## UI/UX
+
+* Describe any UI/UX considerations:*
+  - Link to design mockups or describe the expected user interface changes.
+  - Note any specific UX flows or states (loading spinners, error messages, etc.).
+  - Accessibility considerations, if any.
+
+## Analytics
+
+* Outline analytics and metrics tracking:*
+  - What events or metrics will be collected (e.g., feature usage, conversion rates)?
+  - How will we measure the success of this feature? (e.g., increase in engagement by X% as noted in PRD's Success Metrics)
+
+Test and Rollout Strategy
+
+* Explain how the feature will be tested and released:*
+  - **Testing:** Describe test plans (unit tests, integration tests, end-to-end tests). Mention any specific tools or frameworks (e.g., Jest for frontend, pytest for backend).
+  - **Feature Flag:** Indicate if the feature will be behind a feature flag for a gradual rollout.
+  - **Rollout Plan:** Describe deployment phases (e.g., internal beta, percentage rollout, full release).
+  - **Monitoring:** What logs or monitors will be in place to catch issues after launch?
+  - **Rollback:** Plan to disable or revert the feature if a serious issue is discovered.
+
+Open Questions
+
+*List any open issues or decisions that need input:*
+  - Technical uncertainties (e.g., "Should we use library X or Y for this component?").
+  - Areas where feedback from reviewers is requested.
+```
+
+## Target Audience
+The primary readers of the RFC are **engineers and stakeholders** who will review or implement it. It should be more technical than the PRD, but still clear. Assume the reader has general software engineering knowledge, but provide context for project-specific systems or acronyms.
+
+## Output
+- **Format:** Markdown (`.md`), following the template above.
+- **Location:** `/tasks/` or a dedicated `docs/` folder (per your project conventions).
+- **Filename:** `rfc-[feature-name].md`
+
+## Final Instructions for the AI
+1. Do **not** start writing the RFC until all necessary technical clarifications have been gathered.
+2. Use the PRD as the basis for requirements, but expand with *how* to fulfill those in technical terms.
+3. Emphasize a plan that delivers value in vertical slices, as outlined.
+4. Ensure the RFC is comprehensive but concise in each section (avoid verbose or irrelevant detail).
+5. Once the RFC is complete, the next step will be to generate implementation tasks based on this design.
+
